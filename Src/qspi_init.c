@@ -92,7 +92,7 @@ void clock_setup(void)
 	while ((RCC_CR & RCC_CR_PLL1RDY)) {
 	}
 	/* Configure PLL1 as clock source:
-	 * OSC_HSE = 64 MHz
+	 * OSC_HSI = 64 MHz
 	 * VCO = 640MHz
 	 * pll1_p = 320MHz / pll1_q = 320MHz*/
 	divm = 8;

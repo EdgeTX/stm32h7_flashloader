@@ -87,7 +87,7 @@ int main(void) {
   // Program page
   //
   Init(0, 0, 0);
-  //r = ProgramPage(_FLASH_BASE_ADDR, sizeof(_acTestData), (U8 *)_acTestData);
+  r = ProgramPage(_FLASH_BASE_ADDR, sizeof(_acTestData), (U8 *)_acTestData);
   if (r != 0) {  // Error?
   //  while (1);
   }

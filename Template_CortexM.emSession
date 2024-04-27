@@ -6,20 +6,18 @@
   <Exceptions set="HardFault"/>
  </Breakpoints>
  <ExecutionProfileWindow/>
- <FrameBufferWindow>
-  <FrameBufferWindow bufferHeight="-1" addressSpace="" addressText="" bufferWidth="-1"/>
- </FrameBufferWindow>
+ <FrameBuffer/>
  <Memory1>
-  <MemoryWindow addressSpace="" dataSize="1" autoEvaluate="0" viewMode="0" addressOrder="0" columnsText="" refreshPeriod="0" name="FlashLoader" radix="16" sizeText="" addressText="0x90000000"/>
+  <MemoryWindow addressSpace="" dataSize="1" autoEvaluate="0" viewMode="0" viewType="4" addressOrder="0" columnsText="" refreshPeriod="0" name="FlashLoader" sizeText="" addressText="0x90000000"/>
  </Memory1>
  <Memory2>
-  <MemoryWindow addressSpace="" dataSize="1" autoEvaluate="0" viewMode="0" addressOrder="0" columnsText="" refreshPeriod="0" name="FlashLoader" radix="16" sizeText="" addressText="0x2400023C"/>
+  <MemoryWindow addressSpace="" dataSize="1" autoEvaluate="0" viewMode="0" viewType="4" addressOrder="0" columnsText="" refreshPeriod="0" name="FlashLoader" sizeText="" addressText="0x2400023C"/>
  </Memory2>
  <Memory3>
-  <MemoryWindow addressSpace="" dataSize="1" autoEvaluate="0" viewMode="0" addressOrder="0" columnsText="" refreshPeriod="0" name="FlashLoader" radix="16" sizeText="" addressText=""/>
+  <MemoryWindow addressSpace="" dataSize="1" autoEvaluate="0" viewMode="0" viewType="4" addressOrder="0" columnsText="" refreshPeriod="0" name="FlashLoader" sizeText="" addressText=""/>
  </Memory3>
  <Memory4>
-  <MemoryWindow addressSpace="" dataSize="1" autoEvaluate="0" viewMode="0" addressOrder="0" columnsText="" refreshPeriod="0" name="FlashLoader" radix="16" sizeText="" addressText=""/>
+  <MemoryWindow addressSpace="" dataSize="1" autoEvaluate="0" viewMode="0" viewType="4" addressOrder="0" columnsText="" refreshPeriod="0" name="FlashLoader" sizeText="" addressText=""/>
  </Memory4>
  <Project>
   <ProjectSessionItem path="Template_CortexM"/>
@@ -61,17 +59,18 @@
   <Watches active="0" update="Never"/>
  </Watch4>
  <Files>
-  <SessionOpenFile windowGroup="DockEditLeft" x="15" y="115" useTextEdit="1" useBinaryEdit="0" left="0" path="Src/FlashPrg.c" selected="0" top="31" codecName="Default"/>
-  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="94" useTextEdit="1" useBinaryEdit="0" left="0" path="Src/main.c" selected="0" top="63" codecName="Default"/>
-  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="137" useTextEdit="1" useBinaryEdit="0" left="0" path="Src/qspi_init.c" selected="0" top="107" codecName="Default"/>
-  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="101" useTextEdit="1" useBinaryEdit="0" left="0" path="Src/hal/qspi.c" selected="1" top="106" codecName="Default"/>
-  <SessionOpenFile windowGroup="DockEditLeft" x="17" y="101" useTextEdit="1" useBinaryEdit="0" left="0" path="Src/hal/qspi.h" selected="0" top="78" codecName="Default"/>
-  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="48" useTextEdit="1" useBinaryEdit="0" left="0" path="Src/hal/gpio.c" selected="0" top="0" codecName="Default"/>
-  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="258" useTextEdit="1" useBinaryEdit="0" left="0" path="Src/thumb_crt0.s" selected="0" top="237" codecName="Default"/>
-  <SessionOpenFile windowGroup="DockEditLeft" x="79" y="13" useTextEdit="1" useBinaryEdit="0" left="0" path="Src/FlashDev.c" selected="0" top="0" codecName="Default"/>
-  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="42" useTextEdit="1" useBinaryEdit="0" left="0" path="Src/FlashOS.h" selected="0" top="13" codecName="Default"/>
-  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="15" useTextEdit="1" useBinaryEdit="0" left="0" path="Src/hal/stm32h7_regs.h" selected="0" top="0" codecName="Default"/>
-  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="0" useTextEdit="1" useBinaryEdit="0" left="0" path="Src/hal/gpio.h" selected="0" top="0" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="288" useTextEdit="1" path="Src/FlashPrg.c" left="0" top="0" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="94" useTextEdit="1" path="Src/main.c" left="0" top="44" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="96" y="105" useTextEdit="1" path="Src/qspi_init.c" left="0" selected="1" top="93" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="161" useTextEdit="1" path="Src/hal/qspi.c" left="0" top="161" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="8" y="25" useTextEdit="1" path="Src/hal/qspi.h" left="0" top="0" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="48" useTextEdit="1" path="Src/hal/gpio.c" left="0" top="0" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="258" useTextEdit="1" path="Src/thumb_crt0.s" left="0" top="237" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="67" y="18" useTextEdit="1" path="Src/FlashDev.c" left="0" top="0" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="42" useTextEdit="1" path="Src/FlashOS.h" left="0" top="26" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="15" useTextEdit="1" path="Src/hal/stm32h7_regs.h" left="0" top="0" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="0" useTextEdit="1" path="Src/hal/gpio.h" left="0" top="0" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="38" y="36" useTextEdit="1" path="Template_CortexM.emProject" left="0" top="42" codecName="Default"/>
  </Files>
- <ARMCrossStudioWindow activeProject="FlashLoader" fileDialogDefaultFilter="*.c" autoConnectTarget="J-Link" buildConfiguration="Release" debugSearchFileMap="" fileDialogInitialDirectory="" debugSearchPath="" autoConnectCapabilities="3199"/>
+ <EMStudioWindow activeProject="FlashLoader" fileDialogDefaultFilter="*.c" autoConnectTarget="J-Link" buildConfiguration="Release" sessionSettings="" debugSearchFileMap="" fileDialogInitialDirectory="" debugSearchPath="" autoConnectCapabilities="3199"/>
 </session>

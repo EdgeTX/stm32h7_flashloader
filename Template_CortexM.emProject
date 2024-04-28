@@ -26,7 +26,7 @@
       c_user_include_directories=".;./Src;./Src/hal"
       gcc_optimization_level="None"
       linker_section_placement_file="$(ProjectDir)/Placement_debug.xml"
-      linker_section_placements_segments="FLASH1 RX 0x08000000 0x00020000;FLASH2 RX 0x90000000 0x10000000;RAM1 RWX 0x24000000 0x00080000;"
+      linker_section_placements_segments="FLASH1 RX 0x08000000 0x00020000;FLASH2 RX 0x90000000 0x10000000;RAM RWX 0x24000000 0x00080000;;RAM2 RWX 0x30000000 0x00048000"
       project_type="Executable" />
     <configuration
       Name="Release"
@@ -39,7 +39,7 @@
       default_zeroed_section="PrgData"
       gcc_entry_point="ProgramPage"
       gcc_optimization_level="Level 3"
-      linker_keep_symbols="_vectors;_Dummy;FlashDevice;EraseChip;EraseSector;ProgramPage;Init;UnInit;Verify;BlankCheck"
+      linker_keep_symbols="_vectors;_Dummy;FlashDevice;EraseChip;EraseSector;ProgramPage;Init;UnInit;Verify;BlankCheck;SEGGER_OPEN_CalcCRC;SEGGER_OPEN_Read;SEGGER_OPEN_Program;SEGGER_OPEN_Erase;SEGGER_OPEN_Start;SEGGER_OFL_Lib_StartTurbo;SEGGER_OFL_Lib_CalcCRC"
       linker_output_format="hex"
       linker_section_placement_file="$(ProjectDir)/Placement_release.xml" />
     <folder Name="Src">

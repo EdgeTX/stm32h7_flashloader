@@ -1,5 +1,6 @@
 <!DOCTYPE Board_Memory_Definition_File>
 <Root name="Template_MemoryMap" >
-  <MemorySegment start="0x24000000" size="0x4000" access="Read/Write" name="RAM" /> 
+  <MemorySegment start="0x24000000" size="0x40000" access="Read/Write" name="RAM" /> 
+  <MemorySegment start="0x30000000" size="0x48000" access="Read/Write" name="RAM2" /> 
 </Root>
  

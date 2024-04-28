@@ -12,6 +12,12 @@ Purpose : Contains functions for RAMCode debugging.
 #include <stdio.h>
 #include "FlashOS.h"
 
+#define CRC_START               (0x1A2B3C4D)
+#define CRC_POLY                (0x04C11DB7)
+#define TEST_DATA_CRC           (0x074BF78A)
+
+static volatile U32 crc = 0;
+
 static U8 _acTestData[512] = {
   0x00, 0x00, 0x00, 0x00, 0x01, 0x00, 0x00, 0x00, 0x02, 0x00, 0x00, 0x00, 0x03, 0x00, 0x00, 0x00,
   0x04, 0x00, 0x00, 0x00, 0x05, 0x00, 0x00, 0x00, 0x06, 0x00, 0x00, 0x00, 0x07, 0x00, 0x00, 0x00,
@@ -92,6 +98,14 @@ int main(void) {
   //  while (1);
   }
   UnInit(0);
+
+
+          Init(0, 0, 0);
+        crc = SEGGER_OPEN_CalcCRC(CRC_START, _FLASH_BASE_ADDR, sizeof(_acTestData), CRC_POLY);
+        if (crc != TEST_DATA_CRC) {  // Error?
+                while (1);
+        }
+        UnInit(0);
   return r;
 }
 

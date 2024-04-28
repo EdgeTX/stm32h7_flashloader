@@ -11,17 +11,6 @@
 typedef uint32_t U32;
 typedef uint16_t U16;
 typedef uint8_t U8;
-typedef unsigned char   undefined;
-
-typedef unsigned char    byte;
-typedef unsigned int    uint;
-typedef unsigned char    undefined1;
-//typedef struct SEGGER_OFL_API SEGGER_OFL_API, *PSEGGER_OFL_API;
-
-
-//typedef struct SEGGER_OPEN_CMD_INFO SEGGER_OPEN_CMD_INFO, *PSEGGER_OPEN_CMD_INFO;
-
-//struct SEGGER_OPEN_CMD_INFO;  // Forward declaration of OFL lib private struct
 
 struct SEGGER_OPEN_CMD_INFO {
     uint32_t cmdParam0;
@@ -39,40 +28,23 @@ struct SEGGER_OPEN_CMD_INFO {
 };
 
 typedef struct  {
-        // Optional functions may be NULL
-        //
-        void (*pfFeedWatchdog)   (void);                                            // Optional
-        int  (*pfInit)           (U32 Addr, U32 Freq, U32 Func);                    // Mandatory
-        int  (*pfUnInit)         (U32 Func);                                        // Mandatory
-        int  (*pfEraseSector)    (U32 Addr);                                        // Mandatory
-        int  (*pfProgramPage)    (U32 Addr, U32 NumBytes, U8 *pSrcBuff);            // Mandatory
-        int  (*pfBlankCheck)     (U32 Addr, U32 NumBytes, U8 BlankData);            // Optional
-        int  (*pfEraseChip)      (void);                                            // Optional
-        U32  (*pfVerify)         (U32 Addr, U32 NumBytes, U8 *pSrcBuff);            // Optional
-        U32  (*pfSEGGERCalcCRC)  (U32 CRC, U32 Addr, U32 NumBytes, U32 Polynom);    // Optional
-        int  (*pfSEGGERRead)     (U32 Addr, U32 NumBytes, U8 *pDestBuff);           // Optional
-        int  (*pfSEGGERProgram)  (U32 DestAddr, U32 NumBytes, U8 *pSrcBuff);        // Optional
-        int  (*pfSEGGERErase)    (U32 SectorAddr, U32 SectorIndex, U32 NumSectors); // Optional
-        void (*pfSEGGERStart)    (volatile struct SEGGER_OPEN_CMD_INFO* pInfo);     // Optional
+  // Optional functions may be NULL
+  //
+  void (*pfFeedWatchdog)   (void);                                            // Optional
+  int  (*pfInit)           (U32 Addr, U32 Freq, U32 Func);                    // Mandatory
+  int  (*pfUnInit)         (U32 Func);                                        // Mandatory
+  int  (*pfEraseSector)    (U32 Addr);                                        // Mandatory
+  int  (*pfProgramPage)    (U32 Addr, U32 NumBytes, U8 *pSrcBuff);            // Mandatory
+  int  (*pfBlankCheck)     (U32 Addr, U32 NumBytes, U8 BlankData);            // Optional
+  int  (*pfEraseChip)      (void);                                            // Optional
+  U32  (*pfVerify)         (U32 Addr, U32 NumBytes, U8 *pSrcBuff);            // Optional
+  U32  (*pfSEGGERCalcCRC)  (U32 CRC, U32 Addr, U32 NumBytes, U32 Polynom);    // Optional
+  int  (*pfSEGGERRead)     (U32 Addr, U32 NumBytes, U8 *pDestBuff);           // Optional
+  int  (*pfSEGGERProgram)  (U32 DestAddr, U32 NumBytes, U8 *pSrcBuff);        // Optional
+  int  (*pfSEGGERErase)    (U32 SectorAddr, U32 SectorIndex, U32 NumSectors); // Optional
+  void (*pfSEGGERStart)    (volatile struct SEGGER_OPEN_CMD_INFO* pInfo);     // Optional
 } SEGGER_OFL_API;
 
-
-
-        // Optional functions may be NULL
-        //
-     typedef    void (*pfFeedWatchdog)   (void);                                            // Optional
-   typedef      int  (*pfInit)           (U32 Addr, U32 Freq, U32 Func);                    // Mandatory
-      typedef   int  (*pfUnInit)         (U32 Func);                                        // Mandatory
-   typedef      int  (*pfEraseSector)    (U32 Addr);                                        // Mandatory
-    typedef     int  (*pfProgramPage)    (U32 Addr, U32 NumBytes, U8 *pSrcBuff);            // Mandatory
-   typedef      int  (*pfBlankCheck)     (U32 Addr, U32 NumBytes, U8 BlankData);            // Optional
-   typedef      int  (*pfEraseChip)      (void);                                            // Optional
-   typedef      U32  (*pfVerify)         (U32 Addr, U32 NumBytes, U8 *pSrcBuff);            // Optional
-   typedef      U32  (*pfSEGGERCalcCRC)  (U32 CRC, U32 Addr, U32 NumBytes, U32 Polynom);    // Optional
-typedef        int  (*pfSEGGERRead)     (U32 Addr, U32 NumBytes, U8 *pDestBuff);           // Optional
-typedef         int  (*pfSEGGERProgram)  (U32 DestAddr, U32 NumBytes, U8 *pSrcBuff);        // Optional
-typedef         int  (*pfSEGGERErase)    (U32 SectorAddr, U32 SectorIndex, U32 NumSectors); // Optional
- typedef        void (*pfSEGGERStart)    (volatile struct SEGGER_OPEN_CMD_INFO* pInfo);     // Optional
 
 typedef enum SEGGER_CMD {
     SEGGER_CMD_IDLE=0,
@@ -111,23 +83,6 @@ struct FlashDevice  {
    struct SECTOR_INFO SectorInfo[MAX_NUM_SECTORS]; // Flash sector layout definition
 };
 
-#if 0
-//
-// Flash module functions
-//
-extern int Init        (U32 Addr, U32 Freq, U32 Func);
-extern int UnInit      (U32 Func);
-extern int BlankCheck  (U32 Addr, U32 NumBytes, U8 BlankData);
-extern int EraseChip   (void);
-extern int EraseSector (U32 Addr);
-extern int ProgramPage (U32 Addr, U32 NumBytes, U8 *pSrcBuff);
-extern U32 Verify      (U32 Addr, U32 NumBytes, U8 *pSrcBuff);
-
-//
-// SEGGER defined functions
-//
-extern int SEGGER_OPEN_Read (U32 Addr, U32 NumBytes, U8 *pDestBuff);
-#endif
 __attribute__ ((noinline)) int  Init        (U32 Addr, U32 Freq, U32 Func);                    // Mandatory
 __attribute__ ((noinline)) int  UnInit      (U32 Func);                                        // Mandatory
 __attribute__ ((noinline)) int  EraseSector (U32 Addr);                                        // Mandatory
@@ -145,4 +100,4 @@ __attribute__ ((noinline)) int  SEGGER_OPEN_Erase    (U32 SectorAddr, U32 Sector
 __attribute__ ((noinline)) void SEGGER_OPEN_Start    (volatile struct SEGGER_OPEN_CMD_INFO* pInfo);     // Optional
 
 void SEGGER_OFL_Lib_StartTurbo(const SEGGER_OFL_API *pAPI, volatile struct SEGGER_OPEN_CMD_INFO *pInfo);
-uint SEGGER_OFL_Lib_CalcCRC(const SEGGER_OFL_API *pAPI,U32 CRC,U32 Addr,U32 NumBytes,U32 Polynom);
+uint32_t SEGGER_OFL_Lib_CalcCRC(const SEGGER_OFL_API *pAPI,U32 CRC,U32 Addr,U32 NumBytes,U32 Polynom);

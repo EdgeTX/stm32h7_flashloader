@@ -97,7 +97,7 @@ const SEGGER_OFL_API SEGGER_OFL_Api /*__attribute__((section ("PrgCode"))) */ =
 *
 **********************************************************************
 */
-#define PAGE_SIZE_SHIFT          (3)      // The smallest program unit (one page) is 8 byte in size
+#define PAGE_SIZE_SHIFT          (3)      // The smallest program unit (one page) is 8 uint8_t in size
 //
 // Some flash types require a native verify function as the memory is not memory mapped available (e.g. eMMC flashes).
 // If the verify function is implemented in the algorithm, it will be used by the J-Link DLL during compare / verify
@@ -465,21 +465,21 @@ uint8_t crcTable82F63B78[] = { 0x00, 0x00, 0x00, 0x00, 0x6f, 0xc7, 0x5e, 0x10, 0
 uint8_t crcTableEDB88320[] = { 0x00, 0x00, 0x00, 0x00, 0x64, 0x10, 0xb7, 0x1d, 0xc8, 0x20, 0x6e, 0x3b, 0xac, 0x30, 0xd9, 0x26, 0x90, 0x41, 0xdc, 0x76, 0xf4, 0x51, 0x6b, 0x6b, 0x58, 0x61, 0xb2, 0x4d, 0x3c, 0x71, 0x05, 0x50, 0x20, 0x83, 0xb8, 0xed, 0x44, 0x93, 0x0f, 0xf0, 0xe8, 0xa3, 0xd6, 0xd6, 0x8c, 0xb3, 0x61, 0xcb, 0xb0, 0xc2, 0x64, 0x9b, 0xd4, 0xd2, 0xd3, 0x86, 0x78, 0xe2, 0x0a, 0xa0, 0x1c, 0xf2, 0xbd, 0xbd };
 
 
-uint SEGGER_OFL_Lib_CalcCRC(const SEGGER_OFL_API *pAPI,U32 CRC,U32 Addr,U32 NumBytes,U32 Polynom)
+uint32_t SEGGER_OFL_Lib_CalcCRC(const SEGGER_OFL_API *pAPI,U32 CRC,U32 Addr,U32 NumBytes,U32 Polynom)
 {
   int i;
-  byte *data;
-  uint count;
-  byte *dataEnd;
-  undefined1 *polyTable;
-  byte *readAddr;
-  byte buf [20];
-  byte tmp;
+  uint8_t *data;
+  uint32_t count;
+  uint8_t *dataEnd;
+  uint8_t *polyTable;
+  uint8_t *readAddr;
+  uint8_t buf [20];
+  uint8_t tmp;
   
   polyTable = crcTableEDB88320;
-  readAddr = (byte *)Addr;
+  readAddr = (uint8_t *)Addr;
   if ((Polynom !=0xedb88320) && (polyTable = crcTable82F63B78, Polynom !=0x82f63b78)) {
-    polyTable = (undefined1 *)0x0;
+    polyTable = (uint8_t *)0x0;
   }
   do {
     count = NumBytes;
@@ -494,7 +494,7 @@ uint SEGGER_OFL_Lib_CalcCRC(const SEGGER_OFL_API *pAPI,U32 CRC,U32 Addr,U32 NumB
     }
     readAddr = readAddr + count;
     dataEnd = data + count;
-    if (polyTable == (undefined1 *)0x0) {
+    if (polyTable == (uint8_t *)0x0) {
       do {
         CRC = CRC ^ *data;
         i =0x8;
@@ -513,8 +513,8 @@ uint SEGGER_OFL_Lib_CalcCRC(const SEGGER_OFL_API *pAPI,U32 CRC,U32 Addr,U32 NumB
       do {
         tmp = *data;
         data = data +0x1;
-        count = (CRC ^ tmp) >>0x4 ^ *(uint *)(polyTable + ((CRC ^ tmp) &0xf) *0x4);
-        CRC = *(uint *)(polyTable + (count &0xf) *0x4) ^ count >>0x4;
+        count = (CRC ^ tmp) >>0x4 ^ *(uint32_t *)(polyTable + ((CRC ^ tmp) &0xf) *0x4);
+        CRC = *(uint32_t *)(polyTable + (count &0xf) *0x4) ^ count >>0x4;
       } while (dataEnd != data);
     }
   } while (NumBytes !=0x0);
@@ -531,7 +531,7 @@ uint SEGGER_OFL_Lib_CalcCRC(const SEGGER_OFL_API *pAPI,U32 CRC,U32 Addr,U32 NumB
 void SEGGER_OFL_Lib_StartTurbo(const SEGGER_OFL_API *pAPI, volatile struct SEGGER_OPEN_CMD_INFO *pInfo)
 {
   SEGGER_CMD command;
-  uint tmp;
+  uint32_t tmp;
   int result;
   int *resPtr;
   volatile struct SEGGER_OPEN_CMD_INFO *nextCmd;

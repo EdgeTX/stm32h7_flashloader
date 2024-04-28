@@ -39,7 +39,7 @@
       default_zeroed_section="PrgData"
       gcc_entry_point="ProgramPage"
       gcc_optimization_level="Level 3"
-      linker_keep_symbols="_vectors;_Dummy;FlashDevice;EraseChip;EraseSector;ProgramPage;Init;UnInit;Verify;BlankCheck;SEGGER_OPEN_CalcCRC;SEGGER_OPEN_Read;SEGGER_OPEN_Program;SEGGER_OPEN_Erase;SEGGER_OPEN_Start;SEGGER_OFL_Lib_StartTurbo;SEGGER_OFL_Lib_CalcCRC"
+      linker_keep_symbols="_vectors;_Dummy;FlashDevice;EraseChip;EraseSector;ProgramPage;Init;UnInit;Verify;BlankCheck;SEGGER_OPEN_CalcCRC;SEGGER_OPEN_Read;SEGGER_OPEN_Program;SEGGER_OPEN_Erase;SEGGER_OPEN_Start;SEGGER_OFL_Lib_StartTurbo;SEGGER_OFL_Lib_CalcCRC;PRGDATA_StartMarker"
       linker_output_format="hex"
       linker_section_placement_file="$(ProjectDir)/Placement_release.xml" />
     <folder Name="Src">

@@ -99,5 +99,5 @@ __attribute__ ((noinline)) int  SEGGER_OPEN_Program  (U32 DestAddr, U32 NumBytes
 __attribute__ ((noinline)) int  SEGGER_OPEN_Erase    (U32 SectorAddr, U32 SectorIndex, U32 NumSectors); // Optional
 __attribute__ ((noinline)) void SEGGER_OPEN_Start    (volatile struct SEGGER_OPEN_CMD_INFO* pInfo);     // Optional
 
-void SEGGER_OFL_Lib_StartTurbo(const SEGGER_OFL_API *pAPI, volatile struct SEGGER_OPEN_CMD_INFO *pInfo);
-uint32_t SEGGER_OFL_Lib_CalcCRC(const SEGGER_OFL_API *pAPI,U32 CRC,U32 Addr,U32 NumBytes,U32 Polynom);
+__attribute__ ((noinline)) void SEGGER_OFL_Lib_StartTurbo(const SEGGER_OFL_API *pAPI, volatile struct SEGGER_OPEN_CMD_INFO *pInfo);
+__attribute__ ((noinline)) uint32_t SEGGER_OFL_Lib_CalcCRC(const SEGGER_OFL_API *pAPI,U32 CRC,U32 Addr,U32 NumBytes,U32 Polynom);

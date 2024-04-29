@@ -474,6 +474,7 @@ __attribute__ ((noinline)) U32 SEGGER_OPEN_CalcCRC(U32 CRC, U32 Addr, U32 NumByt
 /* WARNING: Removing unreachable block (ram,0x000100dc) */
 #endif
 #if SUPPORT_TURBO_MODE
+#if 0
 void SEGGER_OFL_Lib_StartTurbo(const SEGGER_OFL_API *pAPI, volatile struct SEGGER_OPEN_CMD_INFO *pInfo)
 {
   SEGGER_CMD command;
@@ -553,6 +554,94 @@ void SEGGER_OFL_Lib_StartTurbo(const SEGGER_OFL_API *pAPI, volatile struct SEGGE
       (*pAPI->pfFeedWatchdog)();
     }
   } while( 1 );
+}
+#else
+
+#endif
+void SEGGER_OFL_Lib_StartTurbo(SEGGER_OFL_API *pAPI,SEGGER_OPEN_CMD_INFO *pInfo)
+
+{
+  SEGGER_CMD command;
+  uint tmp;
+  int result;
+  U32 sectorIndex;
+  U8 *buf;
+  int *resPtr;
+  SEGGER_OPEN_CMD_INFO *nextCmd;
+  pfSEGGERErase *pfErase;
+  U32 Addr;
+  
+  do {
+    command = pInfo->cmd;
+    nextCmd = pInfo;
+    if (command == SEGGER_CMD_IDLE) goto LAB_00010102;
+    resPtr = (int *)pInfo->result;
+    nextCmd = (SEGGER_OPEN_CMD_INFO *)pInfo->nextCmdRes2;
+    *resPtr = 0x7fffffff;
+    pInfo->cmd = 0;
+    Addr = pInfo->baseAddr + pInfo->offset;
+    result = -1;
+    switch(command) {
+    case SEGGER_CMD_BLANCKCHECK:
+      result = -1;
+      if (pAPI->pfBlankCheck != (pfBlankCheck *)0x0) {
+        result = (*pAPI->pfBlankCheck)(Addr,pInfo->numBytes,(U8)pInfo->cmdParam1);
+      }
+      break;
+    case SEGGER_CMD_CRC:
+      tmp = SEGGER_OFL_Lib_CalcCRC(pAPI,pInfo->cmdParam1,Addr,pInfo->numBytes,pInfo->cmdParam2);
+      resPtr[2] = tmp;
+      result = 0;
+      break;
+    case SEGGER_CMD_READ:
+      pfErase = (pfSEGGERErase *)pAPI->pfSEGGERRead;
+      goto LAB_00010126;
+    case SEGGER_CMD_PROGRAM:
+      pfErase = (pfSEGGERErase *)pAPI->pfSEGGERProgram;
+      goto LAB_00010126;
+    case SEGGER_CMD_ERASECHIP:
+      if (pInfo->numBytes == 0) {
+        result = -1;
+        if (pAPI->pfEraseChip != (pfEraseChip *)0x0) {
+          result = (*pAPI->pfEraseChip)();
+        }
+        break;
+      }
+      pfErase = pAPI->pfSEGGERErase;
+      if ((pfSEGGERRead *)pfErase == (pfSEGGERRead *)0x0) {
+        result = -1;
+        if (pInfo->numBytes == 1) {
+          result = (*pAPI->pfEraseSector)(Addr);
+        }
+        break;
+      }
+      sectorIndex = pInfo->cmdParam1;
+      buf = (U8 *)pInfo->numBytes;
+      goto LAB_00010146;
+    case SEGGER_CMD_INIT:
+      result = Init(Addr,pInfo->cmdParam2,pInfo->cmdParam1);
+      break;
+    case SEGGER_CMD_UNINIT:
+      result = UnInit(pInfo->cmdParam1);
+      break;
+    case SEGGER_CMD_VERIFY:
+      pfErase = (pfSEGGERErase *)pAPI->pfVerify;
+LAB_00010126:
+      result = -1;
+      if ((pfSEGGERRead *)pfErase != (pfSEGGERRead *)0x0) {
+        sectorIndex = pInfo->numBytes;
+        buf = (U8 *)pInfo->data;
+LAB_00010146:
+        result = (*pfErase)(Addr,sectorIndex,buf);
+      }
+    }
+    *resPtr = result;
+LAB_00010102:
+    pInfo = nextCmd;
+    if (pAPI->pfFeedWatchdog != (pfFeedWatchdog *)0x0) {
+      (*pAPI->pfFeedWatchdog)();
+    }
+  } while( true );
 }
 #endif
 uint8_t crcTable82F63B78[] = { 0x00, 0x00, 0x00, 0x00, 0x6f, 0xc7, 0x5e, 0x10, 0xde, 0x8e, 0xbd, 0x20, 0xb1, 0x49, 0xe3, 0x30, 0xbc, 0x1d, 0x7b, 0x41, 0xd3, 0xda, 0x25, 0x51, 0x62, 0x93, 0xc6, 0x61, 0x0d, 0x54, 0x98, 0x71, 0x78, 0x3b, 0xf6, 0x82, 0x17, 0xfc, 0xa8, 0x92, 0xa6, 0xb5, 0x4b, 0xa2, 0xc9, 0x72, 0x15, 0xb2, 0xc4, 0x26, 0x8d, 0xc3, 0xab, 0xe1, 0xd3, 0xd3, 0x1a, 0xa8, 0x30, 0xe3, 0x75, 0x6f, 0x6e, 0xf3 };

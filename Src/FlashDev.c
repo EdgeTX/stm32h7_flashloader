@@ -25,6 +25,10 @@ struct FlashDevice const FlashDevice __attribute__ ((section ("DevDscr"))) =  {
   //
   // Flash sector layout definition
   //
-  0x00001000, 0x00000000,   // 4096 *  4 KB =  16 MB
-  0xFFFFFFFF, 0xFFFFFFFF    // Indicates the end of the flash sector layout. Must be present.
+  {
+    // 4096 *  4 KB =  16 MB
+    { 0x00001000, 0x00000000 },
+    // Indicates the end of the flash sector layout. Must be present.
+    { 0xFFFFFFFF, 0xFFFFFFFF },
+  }
 };

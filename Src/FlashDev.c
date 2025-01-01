@@ -17,7 +17,7 @@ struct FlashDevice const FlashDevice __attribute__ ((section ("DevDscr"))) =  {
   ONCHIP,                    // Flash device type
   0x90000000,                // Flash base address
   0x00800000,                // Total flash device size in Bytes (8 MB)
-  256,                       // Page Size (number of bytes that will be passed to ProgramPage(). May be multiple of min alignment in order to reduce overhead for calling ProgramPage multiple times
+  4096,                       // Page Size (number of bytes that will be passed to ProgramPage(). May be multiple of min alignment in order to reduce overhead for calling ProgramPage multiple times
   0,                         // Reserved, should be 0
   0xFF,                      // Flash erased value
   100,                       // Program page timeout in ms

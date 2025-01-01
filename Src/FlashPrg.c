@@ -43,10 +43,10 @@ static void _FeedWatchdog(void);
 
 
 
-typedef struct {
-        U32 AddVariablesHere;
-} RESTORE_INFO;
-static RESTORE_INFO _RestoreInfo;
+//typedef struct {
+//        U32 AddVariablesHere;
+//} RESTORE_INFO;
+//static RESTORE_INFO _RestoreInfo;
 
 
 /*
@@ -187,14 +187,7 @@ int Init(U32 Addr, U32 Freq, U32 Func) {
   //
   clock_setup();
 
-  gpio_set_qspi(GPIOA_BASE,'B',2,GPIOx_PUPDR_NOPULL, 0x9);
-  gpio_set_qspi(GPIOA_BASE,'B',6,GPIOx_PUPDR_NOPULL, 0xA);
-  gpio_set_qspi(GPIOA_BASE,'D',11,GPIOx_PUPDR_NOPULL, 0x9);
-  gpio_set_qspi(GPIOA_BASE,'D',12,GPIOx_PUPDR_NOPULL, 0x9);
-  gpio_set_qspi(GPIOA_BASE,'D',13,GPIOx_PUPDR_NOPULL, 0x9);
-  gpio_set_qspi(GPIOA_BASE,'E',2,GPIOx_PUPDR_NOPULL, 0x9);
-
-  quadspi_init(0, (void *)QUADSPI_BASE);
+  qspi_init();
 
   if(Func != 1 )
     quadspi_mmap();

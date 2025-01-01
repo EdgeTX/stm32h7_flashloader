@@ -139,13 +139,21 @@ void clock_setup(void)
 void qspi_init(void)
 {
 
-
+#if 0
   gpio_set_qspi(GPIOA_BASE,'B',2,GPIOx_PUPDR_NOPULL, 0x9);
   gpio_set_qspi(GPIOA_BASE,'B',6,GPIOx_PUPDR_NOPULL, 0xA);
   gpio_set_qspi(GPIOA_BASE,'D',11,GPIOx_PUPDR_NOPULL, 0x9);
   gpio_set_qspi(GPIOA_BASE,'D',12,GPIOx_PUPDR_NOPULL, 0x9);
   gpio_set_qspi(GPIOA_BASE,'D',13,GPIOx_PUPDR_NOPULL, 0x9);
   gpio_set_qspi(GPIOA_BASE,'E',2,GPIOx_PUPDR_NOPULL, 0x9);
+#else
+  gpio_set_qspi(GPIOA_BASE,'F',6,GPIOx_PUPDR_NOPULL, 0x9);
+  gpio_set_qspi(GPIOA_BASE,'F',7,GPIOx_PUPDR_NOPULL, 0x9);
+  gpio_set_qspi(GPIOA_BASE,'F',8,GPIOx_PUPDR_NOPULL, 0xa);
+  gpio_set_qspi(GPIOA_BASE,'F',9,GPIOx_PUPDR_NOPULL, 0xa);
+  gpio_set_qspi(GPIOA_BASE,'F',10,GPIOx_PUPDR_NOPULL, 0x9);
+  gpio_set_qspi(GPIOA_BASE,'G',6,GPIOx_PUPDR_NOPULL, 0xA);
+#endif
 
   quadspi_init(0, (void *)QUADSPI_BASE);
 }

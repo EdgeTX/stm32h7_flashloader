@@ -53,6 +53,8 @@ static U8 _acTestData[512] = {
   0x7C, 0x00, 0x00, 0x00, 0x7D, 0x00, 0x00, 0x00, 0x7E, 0x00, 0x00, 0x00, 0x7F, 0x00, 0x00, 0x00
 };
 
+static U8 rdBuf[512];
+
 #define _FLASH_BASE_ADDR (0x90000000)
 
 /*********************************************************************
@@ -83,7 +85,7 @@ int main(void) {
   //
   // Erase sector
   //
-  Init(0, 0, 0);
+  Init(0, 0, 1);
   r = EraseSector(_FLASH_BASE_ADDR);
   if (r != 0) {  // Error?
     while (1);
@@ -98,7 +100,6 @@ int main(void) {
   //  while (1);
   }
   UnInit(0);
-
 
           Init(0, 0, 0);
         crc = SEGGER_OPEN_CalcCRC(CRC_START, _FLASH_BASE_ADDR, sizeof(_acTestData), CRC_POLY);
